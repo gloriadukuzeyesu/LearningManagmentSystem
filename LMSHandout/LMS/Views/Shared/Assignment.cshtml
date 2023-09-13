@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewData["Title"] = "Assignment";
+}
+
+
+<h4 id="asgname">Assignment</h4>
+<div id="asgcontents"></div>
+<hr />
+<h4>My Submission</h4>
+<div id="submissioncontents"></div>
+<hr />
+@*<h4>Score</h4>
+    <div id="score"></div>
+    <hr />*@
+<div>
+    <textarea rows="4" cols="50" name="SubContents" id="SubContents">Enter new submission</textarea>
+</div>
+
+<div>
+    <input class="btn btn-primary" name="submitButton" id="btnSave" value="Submit" type="button" onclick="SubmitAssignment()">
+</div>
+
+
+@section Scripts
+  {
+    <script type="text/javascript">
+
+    LoadData();
+
+    function SubmitAssignment() {
+
+      var subContents = $("#SubContents").val();
+
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("SubmitAssignmentText", "Student")',
+        dataType: 'json',
+
+        data: {
+          subject: '@ViewData["subject"]',
+          num: Number('@ViewData["num"]'),
+          season: '@ViewData["season"]',
+          year: Number('@ViewData["year"]'),
+          category: '@ViewData["cat"]',
+          asgname: '@ViewData["aname"]',
+          uid: '@User.Identity.Name',
+          contents: subContents},
+        success: function (data, status) {
+          //alert(JSON.stringify(data));
+          if (!data.success) {
+            alert("Unable to submit assignment");
+          }
+          location.reload();
+          //LoadData();
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+    }
+
+    function LoadData() {
+
+      asgname.innerText = '@ViewData["aname"]';
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetAssignmentContents", "Common")',
+        dataType: 'text',
+        data: {
+          subject: '@ViewData["subject"]',
+          num: Number('@ViewData["num"]'),
+          season: '@ViewData["season"]',
+          year: Number('@ViewData["year"]'),
+          category: '@ViewData["cat"]',
+          asgname: '@ViewData["aname"]'},
+        success: function (data, status) {
+          //alert(data);
+
+          var contentsdiv = document.getElementById("asgcontents");
+          contentsdiv.innerHTML = data;
+
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+      });
+
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetSubmissionText", "Common")',
+        dataType: 'text',
+        data: {
+          subject: '@ViewData["subject"]',
+          num: Number('@ViewData["num"]'),
+          season: '@ViewData["season"]',
+          year: Number('@ViewData["year"]'),
+          category: '@ViewData["cat"]',
+          asgname: '@ViewData["aname"]',
+          uid: '@User.Identity.Name'},
+        success: function (data, status) {
+          //alert(data);
+
+
+          var submissiondiv = document.getElementById("submissioncontents");
+          if (data == "") {
+            submissiondiv.innerHTML = "(none)";
+          }
+          else {
+            submissiondiv.innerHTML = data;
+          }
+
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+
+    }
+
+    </script>
+
+}
+
+
+

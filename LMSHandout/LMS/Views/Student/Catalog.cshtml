@@ -1,0 +1,119 @@
+﻿
+@{
+ViewData["Title"] = "Catalog";
+}
+
+<h4 id="topElement">Course Catalog</h4>
+
+
+@section Scripts
+  {
+    <script type="text/javascript">
+
+    LoadData();
+
+    //$(function () {
+    //  LoadData();
+    //});
+
+    function MakeDepartmentTable() {
+
+      var topDiv = document.createElement("div");
+      topDiv.setAttribute("class", "col-md-12");
+
+      var panelDiv = document.createElement("div");
+      panelDiv.setAttribute("class", "panel panel-primary");
+
+      var headingDiv = document.createElement("div");
+      headingDiv.setAttribute("class", "panel-heading");
+
+      var bodyPanel = document.createElement("div");
+      bodyPanel.setAttribute("class", "panel-body");
+
+      var tbl = document.createElement("table");
+      tbl.setAttribute("class", "table table-bordered table-striped table-responsive table-hover");
+
+      bodyPanel.appendChild(tbl);
+
+      panelDiv.appendChild(headingDiv);
+      panelDiv.appendChild(bodyPanel);
+
+      topDiv.appendChild(panelDiv);
+
+      return topDiv;
+    }
+
+    function SetDepartmentName(depDiv, name) {
+
+      var heading = depDiv.getElementsByClassName("panel-heading")[0];
+      var title = document.createElement("h4");
+      title.appendChild(document.createTextNode(name));
+      heading.appendChild(title);
+
+    }
+
+    function PopulateTable(tbl, courses, subject) {
+      var newBody = document.createElement("tbody");
+
+      courses.sort(function (a, b) {
+        return parseInt(a.number) - parseInt(b.number);
+
+      });
+
+      $.each(courses, function (i, item) {
+        var tr = document.createElement("tr");
+
+        var td = document.createElement("td");
+        var a = document.createElement("a");
+        a.setAttribute("href", "/Student/ClassListings/?subject=" + subject + "&num=" + item.number);
+        a.appendChild(document.createTextNode(item.number));
+        td.appendChild(a);
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.cname));
+        tr.appendChild(td);
+
+        newBody.appendChild(tr);
+      });
+
+      tbl.appendChild(newBody);
+
+    }
+
+    function LoadData() {
+
+
+      var prevNode = document.getElementById("topElement");
+
+      $.ajax({
+        type: 'GET',
+        url: '@Url.Action("GetCatalog", "Common")',
+        dataType: 'json',
+        success: function (data, status) {
+          //alert(JSON.stringify(data));
+          $.each(data, function (i, item) {
+            var newDiv = MakeDepartmentTable();
+            SetDepartmentName(newDiv, item.subject + ": " + item.dname);
+            var newTable = newDiv.getElementsByClassName("table")[0];
+            PopulateTable(newTable, item.courses, item.subject);
+
+            prevNode.parentNode.insertBefore(newDiv, prevNode.nextSibling);
+            prevNode = newDiv;
+          });
+
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+    }
+
+
+
+    </script>
+
+}
+
+

@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewData["Title"] = "StudentHome";
+}
+
+<h4 id="StudentInfo"></h4>
+<h4 id="Major"></h4>
+<h4 id="GPA"></h4>
+
+<div class="col-md-12">
+    <h4>My Classes</h4>
+    <table id="tblClasses" class="table table-bordered table-striped table-responsive table-hover">
+        <thead>
+            <tr>
+                <th align="left" class="productth">Course</th>
+                <th align="left" class="productth">Name</th>
+                <th align="left" class="productth">Semester</th>
+                <th align="left" class="productth">Grade</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+@section Scripts
+  {
+    <script type="text/javascript">
+
+    LoadData();
+
+    function LoadData() {
+
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetUser", "Common")',
+        dataType: 'json',
+        data: { uid: '@User.Identity.Name' },
+        success: function (data, status) {
+
+          if (data.success == false) {
+            alert("An error occured when loading user's information");
+          }
+          else {
+            StudentInfo.innerText = data.fname + " " + data.lname + "    " + data.uid;
+            Major.innerText = "Major: " + data.department;
+          }
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+      });
+
+      var tbl = document.getElementById("tblClasses");
+      var body = tbl.getElementsByTagName("tbody")[0];
+      tbl.removeChild(body);
+
+      var newBody = document.createElement("tbody");
+
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetGPA", "Student")',
+        dataType: 'json',
+        data: { uid: '@User.Identity.Name' },
+        success: function (data, status) {
+
+          GPA.innerText = "GPA: " + Number.parseFloat(data.gpa).toFixed(1);
+
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetMyClasses", "Student")',
+        dataType: 'json',
+        data: { uid: '@User.Identity.Name' },
+        success: function (data, status) {
+
+          //alert(JSON.stringify(data));
+
+          $.each(data, function (i, item) {
+
+            var tr = document.createElement("tr");
+
+            var td = document.createElement("td");
+            td.appendChild(document.createTextNode(item.subject + item.number));
+            tr.appendChild(td);
+
+            var td = document.createElement("td");
+            var a = document.createElement("a");
+            a.setAttribute("href", "/Student/Class/?subject=" + item.subject + "&num=" + item.number + "&season=" + item.season + "&year=" + item.year);
+            a.appendChild(document.createTextNode(item.name));
+            td.appendChild(a);
+            tr.appendChild(td);
+
+            var td = document.createElement("td");
+            td.appendChild(document.createTextNode(item.season + " " + item.year ));
+            tr.appendChild(td);
+
+            var td = document.createElement("td");
+            td.appendChild(document.createTextNode(item.grade));
+            tr.appendChild(td);
+
+            newBody.appendChild(tr);
+
+          });
+
+          tbl.appendChild(newBody);
+
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+
+      return false;
+    }
+
+
+
+    </script>
+
+}

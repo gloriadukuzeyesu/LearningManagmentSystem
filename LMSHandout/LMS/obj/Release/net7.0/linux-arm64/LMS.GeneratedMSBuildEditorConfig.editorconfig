@@ -1,0 +1,153 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = LMS
+build_property.RootNamespace = LMS
+build_property.ProjectDir = /Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Areas/Identity/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Areas/Identity/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9Mb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9NYW5hZ2UvQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9NYW5hZ2UvX01hbmFnZU5hdi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9NYW5hZ2UvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Areas/Identity/Pages/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9fVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Areas/Identity/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Administrator/Course.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW5pc3RyYXRvci9Db3Vyc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Administrator/Department.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW5pc3RyYXRvci9EZXBhcnRtZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Administrator/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW5pc3RyYXRvci9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Professor/Assignment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmVzc29yL0Fzc2lnbm1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Professor/CatAssignments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmVzc29yL0NhdEFzc2lnbm1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Professor/Categories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmVzc29yL0NhdGVnb3JpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Professor/Class.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmVzc29yL0NsYXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Professor/Grade.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmVzc29yL0dyYWRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Professor/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmVzc29yL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Professor/Students.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmVzc29yL1N0dWRlbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Professor/Submissions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmVzc29yL1N1Ym1pc3Npb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Shared/Assignment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Fzc2lnbm1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Student/Catalog.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3R1ZGVudC9DYXRhbG9nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Student/Class.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3R1ZGVudC9DbGFzcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Student/ClassListings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3R1ZGVudC9DbGFzc0xpc3RpbmdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Student/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3R1ZGVudC9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gloriadukuzeyesu/Remote/MSD/CS6016_AllMaterials/CS6016/Phase3TeamWork/LMSHandout/LMS/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-jw6uifookt

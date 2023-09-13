@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewData["Title"] = "ClassListings";   
+}
+
+<h4 id="classname">ClassListings</h4>
+
+<div id="departmentDiv" class="col-md-12">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"></h3>
+        </div>
+        <div class="panel-body">
+            <table id="tblClasses" class="table table-bordered table-striped table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th align="left" class="productth">Semester</th>
+                        <th align="left" class="productth">Location</th>
+                        <th align="left" class="productth">Time</th>
+                        <th align="left" class="productth">Instructor</th>
+                        <th align="left" class="productth">Options</th>
+                    </tr>
+                </thead>
+                @*<tbody></tbody>*@
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+  {
+    <script type="text/javascript">
+
+    LoadData();
+
+    function Enroll(_season, _year) {
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("Enroll", "Student")',
+        dataType: 'json',
+
+        data: {
+          subject: '@ViewData["subject"]',
+          num: Number('@ViewData["num"]'),
+          season: _season,
+          year: _year,
+          uid: '@User.Identity.Name',
+          },
+        success: function (data, status) {
+          //alert(JSON.stringify(data));
+          if (data.success == undefined) {
+            alert("Unknown response from controller");
+          }
+          else if (data.success == true) {
+            alert("Successfully enrolled in class");
+          }
+          else{
+            alert("Unable to enroll in class");
+          }
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+    }
+
+    function PopulateTable(tbl, offerings) {
+      var newBody = document.createElement("tbody");
+
+      //courses.sort(function (a, b) {
+      //  return parseInt(a.number) - parseInt(b.number);
+
+      //});
+
+      $.each(offerings, function (i, item) {
+        var tr = document.createElement("tr");
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.season + " " + item.year));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.location));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.start + " - " + item.end));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.lname + ", " + item.fname));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        var a = document.createElement("a");
+        a.setAttribute("href", "javascript:Enroll('" + item.season + "', '" + item.year + "')");
+        a.appendChild(document.createTextNode("enroll"));
+        td.appendChild(a);
+        tr.appendChild(td);
+
+
+        newBody.appendChild(tr);
+      });
+
+      tbl.appendChild(newBody);
+
+    }
+
+    function LoadData() {
+
+      classname.innerText = 'Offerings of @ViewData["subject"] @ViewData["num"]';
+
+      var tbl = document.getElementById("tblClasses");
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetClassOfferings", "Common")',
+        dataType: 'json',
+        data: { subject: '@ViewData["subject"]', number: Number('@ViewData["num"]') },
+        success: function (data, status) {
+
+          PopulateTable(tbl, data);
+
+          //alert(JSON.stringify(data));
+
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+    }
+
+    </script>
+}

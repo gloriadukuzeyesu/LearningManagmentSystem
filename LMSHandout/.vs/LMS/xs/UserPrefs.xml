@@ -1,0 +1,37 @@
+﻿<Properties StartupConfiguration="{F7779DCA-6458-4556-ABC4-E8D6A159851E}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../../.microsoft/usersecrets/6f1c3b0b-3c3e-47c2-be6d-0d548fbdac4c/secrets.json">
+    <Files>
+      <File FileName="LMS/Areas/Identity/Pages/Account/Register.cshtml.cs" />
+      <File FileName="LMS/Program.cs" Line="59" Column="31" />
+      <File FileName="LMS/LMS.csproj" Line="8" Column="1" />
+      <File FileName="../../../../../../.microsoft/usersecrets/6f1c3b0b-3c3e-47c2-be6d-0d548fbdac4c/secrets.json" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="LMS" expanded="True">
+            <Node name="NuGet.Config files" expanded="True" />
+            <Node name="LMS" expanded="True" selected="True">
+              <Node name="Areas" expanded="True">
+                <Node name="Identity" expanded="True">
+                  <Node name="Pages" expanded="True">
+                    <Node name="Account" expanded="True">
+                      <Node name="Register.cshtml" expanded="True" />
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.LMS PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+</Properties>

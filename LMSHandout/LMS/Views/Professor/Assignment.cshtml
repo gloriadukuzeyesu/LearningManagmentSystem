@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewData["Title"] = "Assignment";
+}
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+          body {
+              font-family: "Lato", sans-serif;
+          }
+
+          .sidenav {
+              /*width: 130px;
+        height: 210px;
+        position: fixed;
+        z-index: 1;
+        top: 80px;
+        left: 10px;*/
+              width: 130px;
+              height: 210px;
+              position: fixed;
+              left: 0;
+              right: 0;
+              /*margin-left: auto;
+        margin-right: auto;*/
+              z-index: 1;
+              top: 50px;
+              background: #eee;
+              overflow-x: hidden;
+              padding: 8px 0;
+          }
+
+              .sidenav a {
+                  padding: 6px 8px 6px 16px;
+                  text-decoration: none;
+                  font-size: 18px;
+                  color: #2196F3;
+                  display: block;
+              }
+
+                  .sidenav a:hover {
+                      color: #064579;
+                  }
+
+          .main {
+              margin-left: 140px;
+              min-height: 200px;
+              padding: 0px 10px;
+          }
+    </style>
+</head>
+<body>
+
+    <div class="sidenav">
+        <a href='/Professor/Class?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Assignments</a>
+        <a href='/Professor/Students?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Students</a>
+        <a href='/Professor/Categories?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Assignment Categories</a>
+    </div>
+
+
+    <div class="main">
+        <h4 id="asgname">Assignment</h4>
+        <div id="asgcontents"></div>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+@section Scripts
+  {
+    <script type="text/javascript">
+
+    LoadData();
+
+    function LoadData() {
+
+      asgname.innerText = '@ViewData["aname"]';
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetAssignmentContents", "Common")',
+        dataType: 'text',
+        data: {
+          subject: '@ViewData["subject"]',
+          num: Number('@ViewData["num"]'),
+          season: '@ViewData["season"]',
+          year: Number('@ViewData["year"]'),
+          category: '@ViewData["cat"]',
+          asgname: '@ViewData["aname"]'},
+        success: function (data, status) {
+          //alert(data);
+
+          var contentsdiv = document.getElementById("asgcontents");
+          contentsdiv.innerHTML = data;
+
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+
+    }
+
+    </script>
+
+}
+
+

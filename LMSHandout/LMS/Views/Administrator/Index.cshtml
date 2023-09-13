@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Departments</h2>
+
+<ul id="lstDepartments">
+</ul>
+
+<div class="col-md-12">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">New Department</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group col-md-5">
+                <label>Subject Code (eg: CS, HIST, ART)</label>
+                <input type="text" name="SubjectCode" id="SubjectCode" class="form-control" placeholder="Enter subject code" required="" />
+            </div>
+            <div class="form-group col-md-5">
+                <label>Department Name (eg: Computer Science, History, Art)</label>
+                <input type="text" name="DepartmentName" id="DepartmentName" class="form-control" placeholder="Enter department name" required="" />
+            </div>
+
+            <div class="form-group col-md-1">
+                <div style="float: right; display:inline-block;">
+                    <input class="btn btn-primary" name="submitButton" id="btnSave" value="Add" type="button" onclick="AddDepartment()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+  {
+    <script type="text/javascript">
+
+    LoadData();
+
+
+    function PopulateList(lst, departments) {
+
+      departments.sort(function (a, b) {
+        return a.subject.localeCompare(b.subject);
+
+      });
+
+      $.each(departments, function (i, item) {
+        var li = document.createElement("li");
+        var td = document.createElement("td");
+        var a = document.createElement("a");
+        a.setAttribute("href", "/Administrator/Department/?subject=" + item.subject);
+        a.appendChild(document.createTextNode(item.subject));
+        li.appendChild(a);
+        lst.appendChild(li);
+      });
+
+      //tbl.appendChild(newBody);
+
+    }
+
+    function LoadData() {
+
+      var lst = document.getElementById("lstDepartments");
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetDepartments", "Common")',
+        dataType: 'json',
+        success: function (data, status) {
+
+          PopulateList(lst, data);
+
+          //alert(JSON.stringify(data));
+
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+    }
+
+    function AddDepartment() {
+
+      let subjCode = $("#SubjectCode").val();
+      var deptName = $("#DepartmentName").val();
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("CreateDepartment", "Administrator")',
+        dataType: 'json',
+        data: {
+              subject: subjCode,
+              name: deptName
+          },
+        success: function (data, status) {
+          //alert(JSON.stringify(data));
+          if (!data.success) {
+            alert("Unable to add course");
+          }
+          window.location.reload();
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+    }
+
+    </script>
+}
+
+

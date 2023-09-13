@@ -1,0 +1,239 @@
+﻿
+@{
+    ViewData["Title"] = "CatAssignments";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+          body {
+              font-family: "Lato", sans-serif;
+          }
+
+          .sidenav {
+              /*width: 130px;
+        height: 210px;
+        position: fixed;
+        z-index: 1;
+        top: 80px;
+        left: 10px;*/
+              width: 130px;
+              height: 210px;
+              position: fixed;
+              left: 0;
+              right: 0;
+              /*margin-left: auto;
+        margin-right: auto;*/
+              z-index: 1;
+              top: 50px;
+              background: #eee;
+              overflow-x: hidden;
+              padding: 8px 0;
+          }
+
+              .sidenav a {
+                  padding: 6px 8px 6px 16px;
+                  text-decoration: none;
+                  font-size: 18px;
+                  color: #2196F3;
+                  display: block;
+              }
+
+                  .sidenav a:hover {
+                      color: #064579;
+                  }
+
+          .main {
+              margin-left: 140px;
+              min-height: 200px;
+              padding: 0px 10px;
+          }
+    </style>
+</head>
+<body>
+
+    <div class="sidenav">
+        <a href='/Professor/Class?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Assignments</a>
+        <a href='/Professor/Students?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Students</a>
+        <a href='/Professor/Categories?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Assignment Categories</a>
+    </div>
+
+
+    <div class="main">
+        <h4 id="classname">Class</h4>
+
+        <div id="departmentDiv" class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Assignments in '@ViewData["cat"]'</h3>
+                </div>
+                <div class="panel-body">
+                    <table id="tblAssignments" class="table table-bordered table-striped table-responsive table-hover">
+                        <thead>
+                            <tr>
+                                <th align="left" class="productth">Name</th>
+                                <th align="left" class="productth">Due</th>
+                                <th align="left" class="productth">Submissions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">New Assignment</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="clearfix"></div>
+                    <div class="form-group col-md-5">
+                        <label>Name</label>
+                        <input type="text" name="AsgName" id="AsgName" class="form-control" placeholder="Enter assignment name" required="" />
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label>Points</label>
+                        <input type="text" name="AsgPoints" id="AsgPoints" class="form-control" placeholder="Enter max points" required="" />
+                    </div>
+                    <br />
+                    <div class="form-group col-md-5">
+                        <label>Due</label>
+                        <input type="datetime-local" name="AsgDue" id="AsgDue" value="2018-01-01T23:59:59">
+                    </div>
+                    <br />
+                    <div class="form-group col-md-3">
+                        <textarea rows="4" cols="50" name="AsgContents" id="AsgContents">Enter contents here</textarea>
+                    </div>
+
+                    <div class="form-group col-md-5">
+                        <div style="float: right; display:inline-block;">
+                            <input class="btn btn-primary" name="submitButton" id="btnSave" value="Add" type="button" onclick="AddAssignment()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+@section Scripts
+  {
+    <script type="text/javascript">
+
+    LoadData();
+
+    function PopulateTable(tbl, offerings) {
+      var newBody = document.createElement("tbody");
+
+      $.each(offerings, function (i, item) {
+        var tr = document.createElement("tr");
+
+
+        var td = document.createElement("td");
+        var a = document.createElement("a");
+        a.setAttribute("href", "/Professor/Assignment/?subject=" + '@ViewData["subject"]' + "&num=" + '@ViewData["num"]' + "&season=" + '@ViewData["season"]' + "&year=" + '@ViewData["year"]' + "&cat=" + '@ViewData["cat"]' + "&aname=" + item.aname);
+        a.appendChild(document.createTextNode(item.aname));
+        td.appendChild(a);
+        tr.appendChild(td);
+
+
+        //var td = document.createElement("td");
+        //td.appendChild(document.createTextNode(item.aname));
+        //tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.due));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.submissions));
+        tr.appendChild(td);
+
+        newBody.appendChild(tr);
+      });
+
+      tbl.appendChild(newBody);
+
+
+    }
+
+    function AddAssignment() {
+
+      var asgName = $("#AsgName").val();
+      var asgPoints = Number($("#AsgPoints").val());
+      var asgContents = $("#AsgContents").val();
+      var asgDue = document.getElementById("AsgDue").value;
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("CreateAssignment", "Professor")',
+        dataType: 'json',
+        data: {
+          subject: '@ViewData["subject"]',
+          num: Number('@ViewData["num"]'),
+          season: '@ViewData["season"]',
+          year: Number('@ViewData["year"]'),
+          category: '@ViewData["cat"]',
+          asgname: asgName,
+          asgpoints: asgPoints,
+          asgdue: asgDue,
+          asgcontents: asgContents},
+        success: function (data, status) {
+          //alert(JSON.stringify(data));
+          if (!data.success) {
+            alert("Unable to add assignment");
+          }
+          location.reload();
+          //LoadData();
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+    }
+
+    function LoadData() {
+      classname.innerText = '@ViewData["subject"] @ViewData["num"] @ViewData["season"] @ViewData["year"]';
+
+      var tbl = document.getElementById("tblAssignments");
+      var body = tbl.getElementsByTagName("tbody")[0];
+      tbl.removeChild(body);
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetAssignmentsInCategory", "Professor")',
+        dataType: 'json',
+        data: {
+          subject: '@ViewData["subject"]',
+          num: Number('@ViewData["num"]'),
+          season: '@ViewData["season"]',
+          year: Number('@ViewData["year"]'),
+          category: '@ViewData["cat"]'},
+        success: function (data, status) {
+          //alert(JSON.stringify(data));
+          PopulateTable(tbl, data);
+
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+
+    }
+
+    </script>
+
+}
+
+

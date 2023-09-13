@@ -1,0 +1,224 @@
+﻿
+@{
+    ViewData["Title"] = "Course";
+}
+
+<h4 id="classname">Class offerings for @ViewData["subject"] @ViewData["num"]</h4>
+
+<div id="departmentDiv" class="col-md-12">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"></h3>
+        </div>
+        <div class="panel-body">
+            <table id="tblClasses" class="table table-bordered table-striped table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th align="left" class="productth">Semester</th>
+                        <th align="left" class="productth">Location</th>
+                        <th align="left" class="productth">Time</th>
+                        <th align="left" class="productth">Instructor</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">New Class</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group col-md-5">
+
+                <label>Season</label>
+                <select id="SeasonSelector">
+                    <option value="Spring">Spring</option>
+                    <option value="Summer">Summer</option>
+                    <option value="Fall">Fall</option>
+                </select>
+
+                <input type="text" name="ClassYear" id="ClassYear" class="form-control" placeholder="Enter semester year" required="" />
+            </div>
+            <div class="form-group col-md-5">
+
+                <div class="control">
+                    <label for="start-time">Start Time:</label>
+                    <input type="time" id="StartTime" name="StartTime"
+                           min="06:00" max="20:00" value="06:00" required />
+                </div>
+                <div class="control">
+                    <label for="end-time">End Time:</label>
+                    <input type="time" id="EndTime" name="EndTime"
+                           min="06:00" max="20:00" value="07:20" required />
+                </div>
+
+            </div>
+
+            <div class="form-group col-md-5">
+
+                <label>Instructor</label>
+                <select id="ProfSelector">
+                </select>
+
+            </div>
+
+            <div class="form-group col-md-5">
+
+                <label>Location</label>
+                <input type="text" name="Location" id="Location" class="form-control" placeholder="Enter location" required="" />
+
+            </div>
+
+            <div class="form-group col-md-1">
+                <div style="float: right; display:inline-block;">
+                    <input class="btn btn-primary" name="submitButton" id="btnSave" value="Add" type="button" onclick="AddClass()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+  {
+    <script type="text/javascript">
+
+    LoadData();
+
+    function AddClass() {
+
+      var claSeason = $("#SeasonSelector").val();
+      var claYear = Number($("#ClassYear").val());
+      var startTime = $("#StartTime").val();
+      var endTime = $("#EndTime").val();
+      var prof = $("#ProfSelector").val();
+      var loc = $("#Location").val();
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("CreateClass", "Administrator")',
+        dataType: 'json',
+        data: {
+          subject: '@ViewData["subject"]',
+          number: Number('@ViewData["num"]'),
+          season: claSeason,
+          year: claYear,
+          start: startTime,
+          end: endTime,
+          location: loc,
+          instructor: prof
+          },
+        success: function (data, status) {
+          //alert(JSON.stringify(data));
+          if (!data.success) {
+            alert("Unable to add class");
+          }
+          window.location.reload();
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+    }
+
+
+    function PopulateInstructors(selector, instructors) {
+      $.each(instructors, function (i, item) {
+
+        var newOption = document.createElement("option");
+        newOption.text = item.lname + ", " + item.fname + ": " + item.uid;
+        newOption.value = item.uid;
+        selector.add(newOption);
+
+      });
+
+    }
+
+    function PopulateTable(tbl, offerings) {
+      var newBody = document.createElement("tbody");
+
+      //courses.sort(function (a, b) {
+      //  return parseInt(a.number) - parseInt(b.number);
+
+      //});
+
+      $.each(offerings, function (i, item) {
+        var tr = document.createElement("tr");
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.season + " " + item.year));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.location));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.start + " - " + item.end));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.lname + ", " + item.fname));
+        tr.appendChild(td);
+
+        newBody.appendChild(tr);
+      });
+
+      tbl.appendChild(newBody);
+
+    }
+
+    function LoadData() {
+
+      var tbl = document.getElementById("tblClasses");
+      var body = tbl.getElementsByTagName("tbody")[0];
+      tbl.removeChild(body);
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetClassOfferings", "Common")',
+        dataType: 'json',
+        data: {
+          subject: '@ViewData["subject"]',
+          number: Number('@ViewData["num"]')
+        },
+          success: function (data, status) {
+            //alert(JSON.stringify(data));
+            PopulateTable(tbl, data);
+          },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+      });
+
+      var selector = document.getElementById("ProfSelector");
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetProfessors", "Administrator")',
+        dataType: 'json',
+        data: {
+          subject: '@ViewData["subject"]'
+        },
+          success: function (data, status) {
+//            alert(JSON.stringify(data));
+            PopulateInstructors(selector, data);
+          },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+      });
+
+
+    }
+
+    </script>
+
+}

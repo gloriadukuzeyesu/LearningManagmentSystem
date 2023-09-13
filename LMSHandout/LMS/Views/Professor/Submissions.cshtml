@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewData["Title"] = "Submissions";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+          body {
+              font-family: "Lato", sans-serif;
+          }
+
+          .sidenav {
+              /*width: 130px;
+        height: 210px;
+        position: fixed;
+        z-index: 1;
+        top: 80px;
+        left: 10px;*/
+              width: 130px;
+              height: 210px;
+              position: fixed;
+              left: 0;
+              right: 0;
+              /*margin-left: auto;
+        margin-right: auto;*/
+              z-index: 1;
+              top: 50px;
+              background: #eee;
+              overflow-x: hidden;
+              padding: 8px 0;
+          }
+
+              .sidenav a {
+                  padding: 6px 8px 6px 16px;
+                  text-decoration: none;
+                  font-size: 18px;
+                  color: #2196F3;
+                  display: block;
+              }
+
+                  .sidenav a:hover {
+                      color: #064579;
+                  }
+
+          .main {
+              margin-left: 140px;
+              min-height: 200px;
+              padding: 0px 10px;
+          }
+    </style>
+</head>
+<body>
+
+    <div class="sidenav">
+        <a href='/Professor/Class?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Assignments</a>
+        <a href='/Professor/Students?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Students</a>
+        <a href='/Professor/Categories?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Assignment Categories</a>
+    </div>
+
+
+    <div class="main">
+        <h4 id="classname">Class</h4>
+
+        <div id="departmentDiv" class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Submissions</h3>
+                </div>
+                <div class="panel-body">
+                    <table id="tblSubmissions" class="table table-bordered table-striped table-responsive table-hover">
+                        <thead>
+                            <tr>
+                                <th align="left" class="productth">Name</th>
+                                <th align="left" class="productth">uID</th>
+                                <th align="left" class="productth">Time</th>
+                                <th align="left" class="productth">Score</th>
+                                <th align="left" class="productth">Submission</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+@section Scripts
+  {
+    <script type="text/javascript">
+
+    LoadData();
+
+    function PopulateTable(tbl, offerings) {
+      var newBody = document.createElement("tbody");
+
+
+      $.each(offerings, function (i, item) {
+        var tr = document.createElement("tr");
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.lname + ", " + item.fname));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.uid));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.time));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(item.score));
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        var a = document.createElement("a");
+        a.setAttribute("href", "/Professor/Grade/?subject=" + '@ViewData["subject"]' + "&num=" + '@ViewData["num"]' + "&season=" + '@ViewData["season"]' + "&year=" + '@ViewData["year"]' + "&cat=" + '@ViewData["cat"]' + "&aname=" + '@ViewData["aname"]' + "&uid=" + item.uid);
+        a.appendChild(document.createTextNode("view"));
+        td.appendChild(a);
+        tr.appendChild(td);
+
+        newBody.appendChild(tr);
+      });
+
+      tbl.appendChild(newBody);
+
+    }
+
+    function LoadData() {
+
+      classname.innerText = '@ViewData["subject"] @ViewData["num"] @ViewData["season"] @ViewData["year"]';
+
+      var tbl = document.getElementById("tblSubmissions");
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetSubmissionsToAssignment", "Professor")',
+        dataType: 'json',
+        data: {
+          subject: '@ViewData["subject"]',
+          num: Number('@ViewData["num"]'),
+          season: '@ViewData["season"]',
+          year: Number('@ViewData["year"]'),
+          category: '@ViewData["cat"]',
+          asgname: '@ViewData["aname"]'},
+        success: function (data, status) {
+          //alert(JSON.stringify(data));
+          PopulateTable(tbl, data);
+
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+
+    }
+
+    </script>
+
+}
+
+

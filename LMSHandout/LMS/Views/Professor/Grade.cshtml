@@ -1,0 +1,162 @@
+﻿
+@{
+    ViewData["Title"] = "Grade";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+          body {
+              font-family: "Lato", sans-serif;
+          }
+
+          .sidenav {
+              /*width: 130px;
+        height: 210px;
+        position: fixed;
+        z-index: 1;
+        top: 80px;
+        left: 10px;*/
+              width: 130px;
+              height: 210px;
+              position: fixed;
+              left: 0;
+              right: 0;
+              /*margin-left: auto;
+        margin-right: auto;*/
+              z-index: 1;
+              top: 50px;
+              background: #eee;
+              overflow-x: hidden;
+              padding: 8px 0;
+          }
+
+              .sidenav a {
+                  padding: 6px 8px 6px 16px;
+                  text-decoration: none;
+                  font-size: 18px;
+                  color: #2196F3;
+                  display: block;
+              }
+
+                  .sidenav a:hover {
+                      color: #064579;
+                  }
+
+          .main {
+              margin-left: 140px;
+              min-height: 200px;
+              padding: 0px 10px;
+          }
+    </style>
+</head>
+<body>
+
+    <div class="sidenav">
+        <a href='/Professor/Class?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Assignments</a>
+        <a href='/Professor/Students?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Students</a>
+        <a href='/Professor/Categories?subject=@ViewData["subject"]&num=@ViewData["num"]&season=@ViewData["season"]&year=@ViewData["year"]'>Assignment Categories</a>
+    </div>
+
+
+    <div class="main">
+
+        <h4>Grade Submission</h4>
+        <div id="submissioncontents"></div>
+        <hr />
+        <div>
+            <input type="text" name="Score" id="Score" class="form-control" placeholder="0" required="" />
+        </div>
+
+        <div>
+            <input class="btn btn-primary" name="submitButton" id="btnSave" value="Submit Score" type="button" onclick="SubmitScore()">
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+@section Scripts
+  {
+    <script type="text/javascript">
+
+    LoadData();
+
+
+    function SubmitScore() {
+
+      var score = Number($("#Score").val());
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GradeSubmission", "Professor")',
+        dataType: 'json',
+
+        data: {
+          subject: '@ViewData["subject"]',
+          num: Number('@ViewData["num"]'),
+          season: '@ViewData["season"]',
+          year: Number('@ViewData["year"]'),
+          category: '@ViewData["cat"]',
+          asgname: '@ViewData["aname"]',
+          uid: '@ViewData["uid"]',
+          score: score},
+        success: function (data, status) {
+          //alert(JSON.stringify(data));
+          if (!data.success) {
+            alert("Unable to submit score");
+          }
+          location.reload();
+          //LoadData();
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+    }
+
+    function LoadData() {
+
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("GetSubmissionText", "Common")',
+        dataType: 'text',
+        data: {
+          subject: '@ViewData["subject"]',
+          num: Number('@ViewData["num"]'),
+          season: '@ViewData["season"]',
+          year: Number('@ViewData["year"]'),
+          category: '@ViewData["cat"]',
+          asgname: '@ViewData["aname"]',
+          uid: '@ViewData["uid"]'},
+        success: function (data, status) {
+          //alert(data);
+
+
+          var submissiondiv = document.getElementById("submissioncontents");
+          if (data == "") {
+            submissiondiv.innerHTML = "(none)";
+          }
+          else {
+            submissiondiv.innerHTML = data;
+          }
+
+        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.responseText);
+                }
+        });
+
+    }
+
+    </script>
+
+}
+
+
