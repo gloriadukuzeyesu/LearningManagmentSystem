@@ -12,9 +12,9 @@ An LMS is a tool for tracking students, teachers, records, classes, materials, e
 
 ## ![**Kapture 2023-09-13 at 16.25.38**](README/Kapture%202023-09-13%20at%2016.25.38.gif)
 
-## Steps to run it
+## How to run it
 
-Click this link [https://team4.dbproject.eng.utah.edu/](https://team4.dbproject.eng.utah.edu/). YOu can register a new user, wehter a student or a professor.  The user Id will be automatically created for your. 
+Click this link [https://team4.dbproject.eng.utah.edu/](https://team4.dbproject.eng.utah.edu/). You can register a new user. For example:  a student,  a professor, or an administrator.  The user Id will be automatically created for your. 
 
 ## Technologies  used 
 
